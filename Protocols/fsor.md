@@ -47,7 +47,8 @@ determining what extensions to the protocol the client supports.
 | `SP` | `<extensions>`  | Carries the extensions supported by the server and requests a capability list from the client. Each extension should be surrounded in hyphens. This packet MAY be sent at any time. |
 | `SC` | `<message>`     | Closes this connection. The server SHOULD NOT send any more packets after this one, nor handle any incoming packets. |
 | `PW` | `<encrypt/decrypt techneques supported by the server>` | Requests the client to send a username and password. This packet MAY be sent at any time. |
-
+| `DE` | `<reason>`      | Sent when the server wishes to deny permissions for a request, such as trying to write to a read only file. Or for bad username password combinations. Meta data can be the code of the message which instigated this responce. |
+| `AK` | None | Sent to acknowledge something. Meta data can be the code of the message which instigated this responce.
 
 Some packets require the client to respond.
 
@@ -55,6 +56,21 @@ Some packets require the client to respond.
 | ---- | --------------- | --------------------------------------------------- |
 | `SP` | `<extensions>`  | Carries the extensions supported by the client. Each extension should be surrounded in hyphens. This packet MAY be sent at any time and SHOULD be sent whenever a `SP` packet is received. |
 | `PW` | `<username>,<password>` | Meta data can include the encryption techneque used. The username and password may both or neither be encrypted or any combination of the two. If no encryption is used then meta should indicate but servers should be able to handle no meta. This packet may ONLY be sent in responce to reciving a `PW` packet.
+
+### File browsing packets
+The following packets are sent to the server from the client so that the client
+can explore the remote file system.
+
+| Code | Payload         | Description                                                                 |
+| ---- | --------------- | ----------------------------------------------------------------------------|
+| `LS` | `<directory path>` | Request a list of files in the directory path.                           |
+
+The server should send responces to the packets as follows.
+
+| Code | Payload         | Description                                                                 |
+| ---- | --------------- | ----------------------------------------------------------------------------|
+| `LS` | `<directory path>` | Request a list of files in the directory path.                           |
+
 
 
 ### Terminal broadcasting packets
