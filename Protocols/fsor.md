@@ -1,4 +1,4 @@
-# *COS num:* File Transfer over Rednet
+# *COS num:* File System over Rednet
 
 > Currently just a copy paste of tror as I'm using it as a template - @Lupus590
 
@@ -9,7 +9,7 @@
 | Type        | Protocol                                                       |
 
 ## Technical Details
-File Transfer over Rednet, or FToR, defines a method of bidirectional file
+File System over Rednet, or FSoR, defines a method of bidirectional file
 transmition. Additionally it defines ways for a client to request additional
 information about the server's file system, such as a list of the files.
 
