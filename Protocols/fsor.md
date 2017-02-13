@@ -38,7 +38,7 @@ The packet MUST take this exact format even if one component is empty. Both
 `:` and `;` MUST be present.
 
  > Might be a good idea to change these so tror can be used with fsor - @Lupus590
-### Connection management
+### Connection management and security
 The server MAY send packets to the client to handle the connection, such as
 determining what extensions to the protocol the client supports.
 
@@ -46,12 +46,16 @@ determining what extensions to the protocol the client supports.
 | ---- | --------------- | --------------------------------------------------- |
 | `SP` | `<extensions>`  | Carries the extensions supported by the server and requests a capability list from the client. Each extension should be surrounded in hyphens. This packet MAY be sent at any time. |
 | `SC` | `<message>`     | Closes this connection. The server SHOULD NOT send any more packets after this one, nor handle any incoming packets. |
+| `PW` | `<encrypt/decrypt techneques supported by the server>` | Requests the client to send a username and password. This packet MAY be sent at any time. |
+
 
 Some packets require the client to respond.
 
 | Code | Payload         | Description                                         |
 | ---- | --------------- | --------------------------------------------------- |
 | `SP` | `<extensions>`  | Carries the extensions supported by the client. Each extension should be surrounded in hyphens. This packet MAY be sent at any time and SHOULD be sent whenever a `SP` packet is received. |
+| `PW` | `<username>,<password>` | Meta data can include the encryption techneque used. The username and password may both or neither be encrypted or any combination of the two. If no encryption is used then meta should indicate but servers should be able to handle no meta. This packet may ONLY be sent in responce to reciving a `PW` packet.
+
 
 ### Terminal broadcasting packets
 The main purpose of TRoR is to broadcast the terminal state over rednet. The
@@ -137,4 +141,5 @@ be `sizeY` table entries, each being `sizeX` characters long.
 ## Available Utilities
  - [nsh and its related utilities](https://github.com/lyqyd/cc-netshell/) uses
    TRoR and various extensions to allow interacting with a computer remotely.
+ - [Unnamed FTP Server with client API](https://github.com/CC-Hive/FTP)
 
