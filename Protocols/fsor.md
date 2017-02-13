@@ -62,12 +62,6 @@ terminal has taken.
 | ---- | --------------- | ----------------------------------------------------------------------------|
 | `TW` | `<text>`        | Carries the written text to the client. The LF character should be replaced with a space. |
 | `TC` | `<x>,<y>`       | Sets the cursor position on the client screen.                              |
-| `TE` | None            | Clears the client's screen.                                                 |
-| `TL` | None            | Clears the current line on the client.                                      |
-| `TS` | `<count>`       | Scrolls the client screen by a set number of lines.                         |
-| `TB` | `<blink>`       | Sets the cursor blink where `true` is blinking and `false` is not blinking. |
-| `TF` | `<color>`       | Sets the foreground color.\*                                                |
-| `TK` | `<color>`       | Sets the background color.\*                                                |
 | `TR` | `<w>,<h>`       | Sets the size of the client terminal in width and height. The client MAY chose to discard data which does not fit on the screen. |
 | `TY` | `<f,b,t>`       | Sets the foreground, background and text of the current line. All three fields MUST be the same length.\*†                       |
 | `TV` | `[<f,b,t>:]`    | Sets the entire terminal's contents. Each line is separated by the `:` character and composed of the foreground, background colors and text. All fields across all lines MUST be the same length. |
@@ -87,14 +81,12 @@ response packet.
 | Code | Payload         | Description                                                   |
 | ---- | --------------- | ------------------------------------------------------------- |
 | `TQ` | None            | Queries the client for terminal dimensions and color support. |
-| `TG` | None            | Queries the client for the current cursor position.           |
 
 The client should send an appropriate response packet to these requests:
 
 | Code | Payload         | Description                                         |
 | ---- | --------------- | --------------------------------------------------- |
 | `TI` | `<w>,<h>,<col>` | Carries the client terminal's width, height and color support to the server. This packet MAY be sent at any time and SHOULD be sent whenever a `TQ` packet is received. |
-| `TP` | `<x>,<y>`       | Carries the client terminal's cursor position. This MUST be sent when receiving a `TG` packet and SHOULD NOT be sent at any other time. |
 
 ### Client events
 The client MAY send events such as key presses to the client. However the server
@@ -139,9 +131,6 @@ The table MUST contain the following fields:
 | `textColor`   | A table representing the background color of the terminal.\*†|
 | `backColor`   | A table representing the textual contents of the terminal.\*†|
 
-\* All colors use the codes defined in [COS 4][cospaint]. The client MAY choose
-to ignore colors if it is incapable of rendering them.
-
 † Each entry of the table represents a separate line of the terminal. There must
 be `sizeY` table entries, each being `sizeX` characters long.
 
@@ -149,4 +138,3 @@ be `sizeY` table entries, each being `sizeX` characters long.
  - [nsh and its related utilities](https://github.com/lyqyd/cc-netshell/) uses
    TRoR and various extensions to allow interacting with a computer remotely.
 
-[cospaint]: /File-Formats/image/paint.md#color-codes "COS 4: Paintutils Image"
