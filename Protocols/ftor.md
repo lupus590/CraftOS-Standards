@@ -9,9 +9,11 @@
 | Type        | Protocol                                                       |
 
 ## Technical Details
-Terminal Redirection over Rednet, or TRoR, defines a method of broadcasting a
-terminal from one computer (the sever) to one client.
+File Transfer over Rednet, or FToR, defines a method of bidirectional file
+transmition. Additionally it defines ways for a client to request additional
+information about the server's file system, such as a list of the files.
 
+> Need to change stuff here - Lupus590
 The server and client communicate via a series of "packets". Packets are
 generally sent with one packet per rednet message, but multiple packets MAY
 be sent at once with each being delimited with the line feed (LF) character
