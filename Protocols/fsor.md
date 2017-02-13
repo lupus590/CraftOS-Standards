@@ -13,7 +13,7 @@ File System over Rednet, or FSoR, defines a method of bidirectional file
 transmition. Additionally it defines ways for a client to request additional
 information about the server's file system, such as a list of the files.
 
-> Need to change stuff here - Lupus590
+> May need to change stuff here - @Lupus590
 The server and client communicate via a series of "packets". Packets are
 generally sent with one packet per rednet message, but multiple packets MAY
 be sent at once with each being delimited with the line feed (LF) character
@@ -37,6 +37,7 @@ These components are combined in the format:
 The packet MUST take this exact format even if one component is empty. Both
 `:` and `;` MUST be present.
 
+ > Might be a good idea to change these so tror can be used with fsor - @Lupus590
 ### Connection management
 The server MAY send packets to the client to handle the connection, such as
 determining what extensions to the protocol the client supports.
