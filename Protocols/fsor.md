@@ -155,7 +155,7 @@ The table MUST contain the following fields:
 be `sizeY` table entries, each being `sizeX` characters long.
 
 ## Available Utilities
- - [nsh and its related utilities](https://github.com/lyqyd/cc-netshell/) uses
-   TRoR and various extensions to allow interacting with a computer remotely.
+ - [nsh with the put and get addon utilities](https://github.com/lyqyd/cc-netshell/)
+ - [lnfsd](https://github.com/lyqyd/lnfs-daemon) and it's companion [lnmount](https://github.com/lyqyd/lnfs-client)
  - [Unnamed FTP Server with client API](https://github.com/CC-Hive/FTP)
 
