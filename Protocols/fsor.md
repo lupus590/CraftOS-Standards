@@ -73,21 +73,12 @@ The server should send responces to the packets as follows.
 
 
 
-### Terminal broadcasting packets
-The main purpose of TRoR is to broadcast the terminal state over rednet. The
-following packets  are sent from the server to the client to specify actions the
-terminal has taken.
 
-| Code | Payload         | Description                                                                 |
-| ---- | --------------- | ----------------------------------------------------------------------------|
-| `TW` | `<text>`        | Carries the written text to the client. The LF character should be replaced with a space. |
-| `TC` | `<x>,<y>`       | Sets the cursor position on the client screen.                              |
-| `TR` | `<w>,<h>`       | Sets the size of the client terminal in width and height. The client MAY chose to discard data which does not fit on the screen. |
+
+
+
 | `TY` | `<f,b,t>`       | Sets the foreground, background and text of the current line. All three fields MUST be the same length.\*†                       |
-| `TV` | `[<f,b,t>:]`    | Sets the entire terminal's contents. Each line is separated by the `:` character and composed of the foreground, background colors and text. All fields across all lines MUST be the same length. |
 
-\* All colors use the codes defined in [COS 4][cospaint]. The client MAY choose
-to ignore colors if it is incapable of rendering them.
 
 † All fields being the same length allows the packet parser to read `n`
 characters once the first `,` has been found. The implementation SHOULD discard
